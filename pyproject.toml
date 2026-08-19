@@ -4,11 +4,14 @@ version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
         "flask>=3.0",
-    "flask-sqlalchemy>=3.0",
-    "flask-cors>=4.0",
-    "python-dotenv>=1.0",
-    "flask-session>=0.8",
-    "bcrypt>=4.0",
+        "flask-sqlalchemy>=3.0",
+        "flask-cors>=4.0",
+        "python-dotenv>=1.0",
+        "flask-session>=0.8",
+        "bcrypt>=4.0",
+        "flask-migrate",
+        "pyjwt",
+        "psycopg2-binary>=2.9.12",
 ]
 
 [project.optional-dependencies]

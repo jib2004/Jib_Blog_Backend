@@ -3,3 +3,4 @@ pytest.ini
 .env
 .env.*
 .venv
+uv.lock
