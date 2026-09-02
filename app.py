@@ -2,8 +2,12 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import dotenv_values
 
+from flask_migrate import Migrate
+
 from routes.auth import auth
 from routes.blog import blog
+
+from flask_cors import CORS
 
 from config import db
 from exceptions.exceptions import (
@@ -24,6 +28,9 @@ app = Flask(__name__)
 app.secret_key = config['SECRET_KEY']
 app.config["SQLALCHEMY_DATABASE_URI"] = config["DB_URL"]
 db.init_app(app)
+Migrate(app, db)
+
+CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
 
 
 @app.route('/')

@@ -14,6 +14,7 @@ def get_all_blogs():
         'id':      b.id,
         'title':   b.title,
         'content': b.content,
+        'user_id':b.user_id,
     } for b in blogs]), 200
 
 

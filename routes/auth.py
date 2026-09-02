@@ -1,3 +1,5 @@
+import json
+
 from flask import Blueprint,request,jsonify,session
 # from app import config
 import jwt
@@ -13,6 +15,12 @@ def register():
     data = request.get_json()
     email = data['email']
     password = data['password']
+    """
+    Things to do here
+    - Validate email exists
+    and return appropriate response
+    """
+
 
 
     if not email or not password:
@@ -24,6 +32,11 @@ def register():
     pass_hash = generate_password_hash(password)
 
     user =User(email=email,password=pass_hash)
+
+    userEmail = db.session.query(User).filter(User.email==email).first()
+    if userEmail:
+        jsonify({'message':'User already exists'}),400
+
 
     db.session.add(user)
     db.session.commit()
@@ -50,7 +63,18 @@ def login():
     },"ckdncndncljncjndscjbsd",algorithm="HS256")
     session['user_token'] = token
     session['user_id'] = user.id
-    return jsonify({'message':'Login successful'})
+    return jsonify({'message':'Login successful','user_token':token,'userInfo':{
+        'id':user.id,
+        'email':user.email,
+    }})
+
+@auth.route('/me')
+def me():
+    token = session.get('user_token')
+    if not token:
+        jsonify({'message':'User not found'}),404
+
+    return jsonify({'message':'User successful'})
 
 @auth.post('/logout')
 def logout():
