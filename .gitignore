@@ -3,6 +3,5 @@ pytest.ini
 .env
 .env.*
 .venv
-uv.lock
 __pycache__
 migrations
