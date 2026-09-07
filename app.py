@@ -1,6 +1,7 @@
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from dotenv import dotenv_values
+from dotenv import load_dotenv
 
 from flask_migrate import Migrate
 
@@ -21,12 +22,12 @@ from exceptions.exceptions import (
 )
 from werkzeug.exceptions import HTTPException
 
-config = dotenv_values(".env")
+load_dotenv()
 
 app = Flask(__name__)
 
-app.secret_key = config['SECRET_KEY']
-app.config["SQLALCHEMY_DATABASE_URI"] = config["DB_URL"]
+app.secret_key = os.environ['SECRET_KEY']
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["DB_URL"]
 db.init_app(app)
 Migrate(app, db)
 
