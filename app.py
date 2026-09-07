@@ -39,9 +39,15 @@ app.config.update(
 db.init_app(app)
 Migrate(app, db)
 
+origin = None
+
+if is_production == "production":
+    origin = "https://jib-blog-frontend.vercel.app/"
+else:
+    origin = "http://localhost:5173"
 
 
-CORS(app, supports_credentials=True, resources={r"/*": {"origins": "http://localhost:5173"}})
+CORS(app, supports_credentials=True, resources={r"/*": {"origins": origin}})
 
 
 @app.route('/')
