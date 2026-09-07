@@ -42,7 +42,7 @@ Migrate(app, db)
 origin = None
 
 if is_production == "production":
-    origin = "https://jib-blog-frontend.vercel.app/"
+    origin = "https://jib-blog-frontend.vercel.app"
 else:
     origin = "http://localhost:5173"
 
