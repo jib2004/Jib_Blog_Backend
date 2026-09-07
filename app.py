@@ -28,10 +28,20 @@ app = Flask(__name__)
 
 app.secret_key = os.environ['SECRET_KEY']
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["DB_URL"]
+
+is_production = os.environ.get("FLASK_ENV") == "production"
+app.config.update(
+    SESSION_COOKIE_SAMESITE="None" if is_production else "Lax",
+    SESSION_COOKIE_SECURE=is_production,
+    SESSION_COOKIE_HTTPONLY=True,
+)
+
 db.init_app(app)
 Migrate(app, db)
 
-CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
+
+
+CORS(app, supports_credentials=True, resources={r"/*": {"origins": "http://localhost:5173/"}})
 
 
 @app.route('/')
