@@ -47,9 +47,6 @@ app.register_error_handler(ValidationError, handle_validation_error)
 app.register_error_handler(HTTPException, handle_http_exception)
 app.register_error_handler(Exception, handle_unexpected_error)
 
-with app.app_context():
-    db.create_all()
-
 if __name__ == '__main__':
 
     app.run(debug=True)

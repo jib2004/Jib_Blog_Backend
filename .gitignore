@@ -4,3 +4,5 @@ pytest.ini
 .env.*
 .venv
 uv.lock
+__pycache__
+migrations

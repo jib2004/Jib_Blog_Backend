@@ -12,7 +12,8 @@ dependencies = [
         "flask-migrate",
         "pyjwt",
         "psycopg2-binary>=2.9.12",
-        "flask-cors"
+        "flask-cors",
+        "gunicorn>=26.2.0",
 ]
 
 [project.optional-dependencies]
